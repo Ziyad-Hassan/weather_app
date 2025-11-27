@@ -22,15 +22,35 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Watch the provider
+    final provider = Provider.of<WeatherProvider>(context);
+
     return MaterialApp(
-      debugShowCheckedModeBanner: false, // Remove debug banner
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Weather App',
+      
+      // 1. Define Light Theme
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue, 
+          brightness: Brightness.light
+        ),
         useMaterial3: true,
       ),
-      // We will create HomePage in the next step
-      home: const HomePage(),
+
+      // 2. Define Dark Theme
+      darkTheme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue, 
+          brightness: Brightness.dark 
+        ),
+        useMaterial3: true,
+      ),
+
+      // 3. Auto-switch based on provider
+      themeMode: provider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
+
+      home: const HomePage(), // Make sure HomePage is imported
     );
   }
 }

@@ -74,9 +74,27 @@ class _HomePageState extends State<HomePage> {
                 labelText: 'Enter City Name',
                 hintText: 'e.g. Cairo, London',
                 border: const OutlineInputBorder(),
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: _searchCity,
+                suffixIcon: Row(
+                  mainAxisSize: MainAxisSize.min, // Important for layout
+                  children: [
+                    // GPS Button
+                    IconButton(
+                      icon: const Icon(Icons.my_location, color: Colors.blue),
+                      onPressed: () {
+                        Provider.of<WeatherProvider>(context, listen: false)
+                            .fetchWeatherByLocation();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => const WeatherDetailsPage()),
+                        );
+                      },
+                    ),
+                    // Search Button
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: _searchCity,
+                    ),
+                  ],
                 ),
               ),
               onSubmitted: (_) => _searchCity(),

@@ -28,6 +28,23 @@ class SettingsPage extends StatelessWidget {
               },
             ),
           ),
+          const Divider(), // Line separator
+
+          // Dark Mode Switch
+          ListTile(
+            leading: Icon(
+              provider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
+            ),
+            title: const Text("Dark Mode"),
+            subtitle: Text(provider.isDarkMode ? "On" : "Off"),
+            trailing: Switch(
+              value: provider.isDarkMode,
+              activeThumbColor: Colors.blue,
+              onChanged: (bool value) {
+                provider.toggleTheme(value);
+              },
+            ),
+          ),
         ],
       ),
     );

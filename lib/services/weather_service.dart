@@ -17,4 +17,16 @@ class WeatherService {
       throw Exception('Failed to load weather data');
     }
   }
+  // Fetch weather by coordinates (Latitude & Longitude)
+  Future<Weather> getWeatherByCoordinates(double lat, double lon, String unit) async {
+    final url = Uri.parse('$baseUrl?lat=$lat&lon=$lon&appid=$apiKey&units=$unit');
+    
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      return Weather.fromJson(jsonDecode(response.body));
+    } else {
+      throw Exception('Failed to load weather data');
+    }
+  }
 }
